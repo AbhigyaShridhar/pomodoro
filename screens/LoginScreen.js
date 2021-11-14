@@ -1,14 +1,99 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
 
-const LoginScreen = () => {
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+import FormInput from '../components/FormInput';
+import FormButton from '../components/FormButton';
+import SocialButton from '../components/SocialButton';
+
+const LoginScreen = ({navigation}) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
-    <View>
-      <Text>
-        Authentication Screen
-      </Text>
+    <View style={styles.container}>
+      <Image
+        source={require('../assets/images/logo.png')}
+        style={styles.logo}
+      />
+      <Text style={styles.text}>The Pomodoro app</Text>
+      <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholder="Email"
+        iconType="user"
+        keyBoardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+
+      <FormInput
+        labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholder="Password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
+
+      <FormButton
+        buttonTitle="Sign In"
+        onPress={() => alert('Sign In Attempt')}
+      />
+
+      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+        <Text style={styles.navButtonText}>
+          Forgot Password?
+        </Text>
+      </TouchableOpacity>
+
+      <SocialButton
+        buttonTitle="Sign In With Google"
+        btnType="google"
+        color="#de4d41"
+        backgroundColor="#f5e7ea"
+        onPress={() => {}}
+      />
+
+      <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.navButtonText}>
+          Don't have an account? Create one...
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 50
+  },
+  logo: {
+    height: 150,
+    width: 150,
+    resizeMode: 'cover',
+  },
+  text: {
+    fontFamily: 'Kufam-SemiBoldItalic',
+    fontSize: 28,
+    marginBottom: 10,
+    color: '#051d5f',
+  },
+  navButton: {
+    marginTop: 15,
+  },
+  forgotButton: {
+    marginVertical: 35,
+  },
+  navButtonText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#2e64e5',
+    fontFamily: 'Lato-Regular',
+  },
+}); 
