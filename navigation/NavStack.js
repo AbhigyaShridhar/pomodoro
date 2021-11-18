@@ -45,12 +45,26 @@ const NavStack = () => {
       <AppStack.Screen
         name="Login"
         component={LoginScreen}
-        options={{header: () => null}}
+        options={({navigation}) => ({
+          title: 'Welcome Back',
+          headerStyle: {
+            backgroundColor: '#f9fafd',
+            shadowColor: '#f9fafd',
+            elevation: 0,
+          },
+        })}
       />
       <AppStack.Screen
         name="Signup"
         component={RegistrationScreen}
-        options={{header: () => null}}
+        options={({navigation}) => ({
+          title: 'Register',
+          headerStyle: {
+            backgroundColor: '#f9fafd',
+            shadowColor: '#f9fafd',
+            elevation: 0,
+          },
+        })}
       />
     </AppStack.Navigator>
   );

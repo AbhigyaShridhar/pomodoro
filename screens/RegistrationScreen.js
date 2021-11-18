@@ -3,11 +3,14 @@ import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
+import { AuthContext } from '../navigation/Auth';
 
 const RegistrationScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
+  const {register} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -41,23 +44,8 @@ const RegistrationScreen = ({navigation}) => {
 
       <FormButton
         buttonTitle="Sign Up"
-        onPress={() => alert('Registration Attempt')}
+        onPress={() => register(email, password)}
       />
-
-      //<View style={styles.textPrivate}>
-      //  <Text style={styles.color_textPrivate}>
-      //    By registering, you confirm that you accept our{' '}
-      //  </Text>
-      //  <TouchableOpacity onPress={() => alert('Terms Clicked!')}>
-      //    <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
-      //      Terms of service
-      //    </Text>
-      //  </TouchableOpacity>
-      //  <Text style={styles.color_textPrivate}> and </Text>
-      //  <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>
-      //    Privacy Policy
-      //  </Text>
-      //</View>
 
       {Platform.OS === 'android' ? (
         <View>
@@ -91,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   text: {
-    fontFamily: 'Kufam-SemiBoldItalic',
+
     fontSize: 28,
     marginBottom: 10,
     color: '#051d5f',
@@ -103,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     color: '#2e64e5',
-    fontFamily: 'Lato-Regular',
+
   },
   textPrivate: {
     flexDirection: 'row',
@@ -114,7 +102,7 @@ const styles = StyleSheet.create({
   color_textPrivate: {
     fontSize: 13,
     fontWeight: '400',
-    fontFamily: 'Lato-Regular',
+
     color: 'grey',
   },
 });
